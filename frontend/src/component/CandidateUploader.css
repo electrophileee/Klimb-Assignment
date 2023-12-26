@@ -1,0 +1,24 @@
+/* src/components/CandidateUploader.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  label {
+    margin-bottom: 8px;
+  }
+  
+  .message {
+    display: none;
+  }
+  
+  .success {
+    background-color: #a3e7a3;
+    color: #116611;
+  }
+  
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
