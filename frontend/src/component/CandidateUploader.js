@@ -37,7 +37,10 @@ const CandidateUploader = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <>
+    <h1 className=' text-center font-[6rem] text-[2rem] mt-[10rem] '>Add candidate records from Excel to  Database</h1>
+
+    <div className="flex flex-col items-center justify-center h-screen mt-[-15rem]">
       <form
         className="flex flex-col items-center"
         onSubmit={handleUpload}
@@ -62,6 +65,7 @@ const CandidateUploader = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
