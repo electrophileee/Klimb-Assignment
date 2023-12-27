@@ -4,15 +4,25 @@ const multer = require('multer');
 const xlsx = require('xlsx');
 const mongoose = require('mongoose');
 const async = require('async');
+const cors = require('cors');
 
 const app = express();
 const PORT = 4000;
+
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000',
+}));
 
 const MONGODB_URI = 'mongodb+srv://abhisahu1908:08AjJZ3KDfkAF5Cw@cluster0.wnzwxeg.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB');
 });
 
 const Candidate = require('./models/CandidateModel');
@@ -35,7 +45,7 @@ app.post('/upload', upload.single('excelFile'), async (req, res) => {
     // Process candidates one at a time
     async.eachSeries(candidateData, (candidate, callback) => {
       // Use the Candidate model here
-      CandidateController.addCandidate(Candidate, candidate, callback);
+      CandidateController.addCandidate(candidate, callback);
     }, (err) => {
       if (err) {
         return res.status(500).json({ success: false, error: err.message });
@@ -43,8 +53,8 @@ app.post('/upload', upload.single('excelFile'), async (req, res) => {
       res.json({ success: true, message: 'Excel processed successfully' });
     });
   } catch (error) {
-    console.error(`Error uploading file: ${error.message}`);
-    res.status(500).json({ success: false, error: error.message });
+    console.error(`Error uploading file: ${error.stack}`);
+    res.status(500).json({ success: false, error: 'An error occurred while uploading the file.' });
   }
 });
 

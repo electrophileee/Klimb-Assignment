@@ -10,7 +10,7 @@ const CandidateUploader = () => {
     const formData = new FormData(e.target);
 
     try {
-      const response = await fetch('/upload', {
+      const response = await fetch('http://localhost:4000/upload', {
         method: 'POST',
         body: formData,
       });
