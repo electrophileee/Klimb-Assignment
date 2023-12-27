@@ -1,4 +1,3 @@
-// controllers/CandidateController.js
 const Candidate = require('../models/CandidateModel');
 
 const addCandidate = async (candidate, callback) => {

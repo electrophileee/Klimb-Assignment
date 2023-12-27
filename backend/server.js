@@ -1,4 +1,3 @@
-// server/app.js
 const express = require('express');
 const multer = require('multer');
 const xlsx = require('xlsx');
@@ -41,7 +40,7 @@ app.post('/upload', upload.single('excelFile'), async (req, res) => {
     const workbook = xlsx.read(buffer, { type: 'buffer' });
     const sheetName = workbook.SheetNames[0];
     const candidateData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
-
+     console.log(candidateData);
     // Process candidates one at a time
     async.eachSeries(candidateData, (candidate, callback) => {
       // Use the Candidate model here
